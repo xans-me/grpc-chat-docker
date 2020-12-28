@@ -47,7 +47,7 @@ func connect(user *protobuff.User) error {
 				break
 			}
 
-			fmt.Printf("%v : %s\n", msg.Id, msg.Content)
+			fmt.Printf("%v \t: %s\n", msg.User.Name, msg.Content)
 
 		}
 	}(stream)
@@ -87,6 +87,7 @@ func main() {
 				Id:        user.Id,
 				Content:   scanner.Text(),
 				Timestamp: timestamp.String(),
+				User:      user,
 			}
 
 			_, err := client.BroadcastMessage(context.Background(), msg)
